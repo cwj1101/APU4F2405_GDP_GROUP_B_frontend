@@ -1,4 +1,4 @@
-# gtdms
+# gtms
 
 ## Project setup
 ```
