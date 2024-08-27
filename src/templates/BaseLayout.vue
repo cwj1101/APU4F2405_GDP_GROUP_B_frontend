@@ -31,13 +31,13 @@
                     <a
                       :class="{
                         'nav-link mx-lg-2': true,
-                        active: currentRoute === '/dashboard',
+                        active: currentRoute === '/camController',
                       }"
                       aria-current="page"
                       href="#"
-                      @click.prevent="navigateTo('/dashboard')"
+                      @click.prevent="navigateTo('/camController')"
                     >
-                      Dashboard
+                      Cam controller
                     </a>
                   </li>
                   <li class="nav-item">

@@ -9,9 +9,9 @@ const routes = [
     path: "/"
   },
   {
-    name: "DashBoard",
-    component: () => import('../components/DashBoard.vue'),
-    path: "/dashboard",
+    name: "camController",
+    component: () => import('../components/CamController.vue'),
+    path: "/camController",
   },
   {
     name: "SignUp",
@@ -46,7 +46,7 @@ const getResponse = async (to, next) => {
     console.log("login result", result);
     if (result.status === 200) {
       if (to.name === 'LoginPage') {
-        next({ name: 'GasDetect' });
+        next({ name: 'camController' });
       } else {
         next();
       }

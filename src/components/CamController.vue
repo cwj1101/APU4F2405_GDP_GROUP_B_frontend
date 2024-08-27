@@ -87,24 +87,25 @@
           </el-col>
         </el-row>
       </el-col> -->
-      <div style="display: flex">
+      <div style="display: flex; justify-content: space-between; padding-left:200px; padding-right:200px; padding-top:20px">
         <div>
           <img
             src="http://192.168.1.102:8000/thermal_feed"
-            width="500"
-            height="250"
-            style="padding-bottom: 10px"
+            width="750"
+            height="350"
+            style="padding-bottom: 10px; padding-right: 10px"
           />
         </div>
         <div>
           <img
             src="http://192.168.1.102:8001/video_feed"
-            width="500"
-            height="250"
+            width="750"
+            height="340"
+            style="padding-left:10px"
           />
         </div>
       </div>
-      <div class="arrows">
+      <div class="arrows" style="padding-top:50px">
         <i
           class="arrow-up bi bi-arrow-up-square-fill"
           @mousedown="startControl('up')"

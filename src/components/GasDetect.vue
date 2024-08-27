@@ -3,7 +3,7 @@
     <el-col :span="24" style="padding-top: 10px">
       <div class="grid-content ep-bg-purple" />
       <el-row :gutter="24">
-        <el-col :span="4">
+        <!-- <el-col :span="4">
           <div class="statistic-card">
             <el-statistic format="HH:mm:ss" :value="todayTime">
               <template #title>
@@ -58,8 +58,8 @@
               </div>
             </div>
           </div>
-        </el-col>
-        <el-col :span="4">
+        </el-col> -->
+        <el-col :span="6">
           <div class="statistic-card">
             <el-statistic :value="highestMq2" title="New transactions today">
               <template #title>
@@ -98,7 +98,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="6">
           <div class="statistic-card">
             <el-statistic :value="highestMq3" title="New transactions today">
               <template #title>
@@ -137,7 +137,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="6">
           <div class="statistic-card">
             <el-statistic :value="highestMq5" title="New transactions today">
               <template #title>
@@ -176,7 +176,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="6">
           <div class="statistic-card">
             <el-statistic :value="highestMq9" title="New transactions today">
               <template #title>
@@ -287,7 +287,7 @@
                   class="chart-frame"
                 ></canvas>
               </div>
-              <div style="flex: 2">
+              <div style="flex: 2; padding-top:80px">
                 <img
                   src="http://192.168.1.102:8001/video_feed"
                   width="500"
@@ -328,11 +328,11 @@
                   class="chart-frame"
                 ></canvas>
               </div>
-              <div style="flex: 2">
+              <div style="flex: 2; padding-top:80px">
                 <img
                   src="http://192.168.1.102:8001/video_feed"
                   width="500"
-                  height="550"
+                  height="450"
                 />
               </div>
             </div>
@@ -369,11 +369,11 @@
                   class="chart-frame"
                 ></canvas>
               </div>
-              <div style="flex: 2">
+               <div style="flex: 2; padding-top:80px">
                 <img
                   src="http://192.168.1.102:8001/video_feed"
                   width="500"
-                  height="550"
+                  height="450"
                 />
               </div>
             </div>
@@ -410,11 +410,11 @@
                   class="chart-frame"
                 ></canvas>
               </div>
-              <div style="flex: 2">
+               <div style="flex: 2; padding-top:80px">
                 <img
                   src="http://192.168.1.102:8001/video_feed"
                   width="500"
-                  height="550"
+                  height="450"
                 />
               </div>
             </div>
@@ -509,7 +509,7 @@ import dayjs from "dayjs";
 import { updateChartData, createChart, zoom } from "../utils/chartJsUtils";
 import { sortStatus, avgStatus } from "../utils/sort";
 import { Plus, Minus, Calendar, Warning } from "@element-plus/icons-vue";
-import { ElNotification } from 'element-plus'
+import { ElNotification } from "element-plus";
 
 let gasData = [];
 let tempAI = [];
@@ -542,16 +542,19 @@ const warningInfo = () => {
   }
   ElNotification({
     title: "Gas Detected",
-    message: messageOut +" is detected",
+    message: messageOut + " is detected",
     type: "warning",
   });
 };
 
- watch([mq2Indicator, mq3Indicator, mq5Indicator, mq9Indicator], ([mq2, mq3, mq5, mq9]) => {
-      if (mq2 === 1 || mq3 === 1 || mq5 === 1 || mq9 === 1) {
-        warningInfo();
-      }
-    });
+watch(
+  [mq2Indicator, mq3Indicator, mq5Indicator, mq9Indicator],
+  ([mq2, mq3, mq5, mq9]) => {
+    if (mq2 === 1 || mq3 === 1 || mq5 === 1 || mq9 === 1) {
+      warningInfo();
+    }
+  }
+);
 
 let isFetching = false;
 let isFetching2 = false;
@@ -638,7 +641,12 @@ const fetchGasData = async () => {
     lowestMq5.value = sortStatus(gasData, "mq5", "asc");
     highestMq9.value = sortStatus(gasData, "mq9", "desc");
     lowestMq9.value = sortStatus(gasData, "mq9", "asc");
-    // mq2Indicator.value  =
+    if (dayjs(dateSelect.value).format("YYYY-MM-DD") && gasData.length >= 1) {
+      mq2Indicator.value = gasData[gasData.length-1].mq2_alert;
+      mq3Indicator.value = gasData[gasData.length-1].mq3_alert;
+      mq5Indicator.value = gasData[gasData.length-1].mq5_alert;
+      mq9Indicator.value = gasData[gasData.length-1].mq9_alert;
+    }
   }
 };
 

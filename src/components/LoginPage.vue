@@ -100,7 +100,7 @@ const login = async () => {
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${result.data.token}`; // Update axios header with new token
-        router.push({ name: "GasDetect" });
+        router.push({ name: "camController" });
       }
     } catch (err) {
      if (err.response && err.response.status === 401) {
